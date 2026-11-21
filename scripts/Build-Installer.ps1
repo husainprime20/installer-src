@@ -28,7 +28,7 @@ $missing = @($required | Where-Object { -not (Test-Path -LiteralPath (Join-Path 
 if ($missing.Count) { throw "Missing from SetupDirectory: $($missing -join ', ')" }
 
 if (-not $MSBuildPath) {
-    $msbuild = Get-Command MSBuild.exe -CommandType Application -ErrorAction SilentlyContinue
+    $msbuild = Get-Command MSBuild.exe -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
     if (-not $msbuild) { throw 'Open a Visual Studio Developer PowerShell or pass -MSBuildPath.' }
     $MSBuildPath = $msbuild.Source
 }
