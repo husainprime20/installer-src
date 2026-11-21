@@ -3079,7 +3079,7 @@ namespace BlueStacks.Installer
 		{
 			LinearGradientBrush background = new LinearGradientBrush(new GradientStopCollection
 			{
-				new GradientStop(Color.FromArgb(alpha + 10, byte.MaxValue, byte.MaxValue, byte.MaxValue), 0.0),
+				new GradientStop(Color.FromArgb((byte)Math.Min(alpha + 10, byte.MaxValue), byte.MaxValue, byte.MaxValue, byte.MaxValue), 0.0),
 				new GradientStop(Color.FromArgb(alpha, byte.MaxValue, byte.MaxValue, byte.MaxValue), 1.0)
 			}, new Point(0.0, 0.0), new Point(0.0, 1.0));
 			Border card = new Border
@@ -3165,7 +3165,7 @@ namespace BlueStacks.Installer
 			border.Width = 46.0;
 			border.Height = 24.0;
 			border.CornerRadius = new CornerRadius(12.0);
-			border.Background = (initialState ? this.MakeGoldBrush(0.0) : this.WhiteA(55));
+			border.Background = (initialState ? (Brush)this.MakeGoldBrush(0.0) : this.WhiteA(55));
 			border.Cursor = System.Windows.Input.Cursors.Hand;
 			border.VerticalAlignment = VerticalAlignment.Center;
 			Ellipse ellipse = new Ellipse
@@ -3191,7 +3191,7 @@ namespace BlueStacks.Installer
 				Duration = new Duration(TimeSpan.FromMilliseconds(150.0))
 			};
 			knob.BeginAnimation(FrameworkElement.MarginProperty, animation);
-			toggle.Background = (state ? this.MakeGoldBrush(0.0) : this.WhiteA(55));
+			toggle.Background = (state ? (Brush)this.MakeGoldBrush(0.0) : this.WhiteA(55));
 		}
 
 		// Token: 0x060001B3 RID: 435 RVA: 0x00014428 File Offset: 0x00012628

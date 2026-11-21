@@ -97,30 +97,30 @@
 				Margin="20"
 				ImageName="Assets\installer_logo.png" />
 			<local:StartInstall
-				Name="mStartInstall"
+				x:Name="mStartInstall"
 				Grid.Row="1"
 				Grid.ColumnSpan="3"
 				Panel.ZIndex="1" />
 			<local:InstallProgress
-				Name="mInstallProgress"
+				x:Name="mInstallProgress"
 				Grid.Row="1"
 				Grid.ColumnSpan="3"
 				Panel.ZIndex="1"
 				Visibility="Hidden" />
 			<local:InstallFinish
-				Name="mInstallFinish"
+				x:Name="mInstallFinish"
 				Grid.Row="1"
 				Grid.ColumnSpan="3"
 				Panel.ZIndex="1"
 				Visibility="Hidden" />
 			<local:ChooseInstallFolder
-				Name="mChooseInstallFolder"
+				x:Name="mChooseInstallFolder"
 				Grid.Row="1"
 				Grid.ColumnSpan="3"
 				Panel.ZIndex="1"
 				Visibility="Hidden" />
 			<local:InstallError
-				Name="mInstallError"
+				x:Name="mInstallError"
 				Grid.Row="1"
 				Grid.ColumnSpan="3"
 				Panel.ZIndex="1"
