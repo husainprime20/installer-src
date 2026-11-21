@@ -1,0 +1,42 @@
+
+[Version]
+Signature="$Windows NT$"
+Class=System
+ClassGuid={4d36e97d-e325-11ce-bfc1-08002be10318}
+Provider=%BSTK%
+DriverPackageType=KernelService
+CatalogFile=BstkDrv.cat
+DriverVer=10/09/2018,6.1.7600.16385
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[DefaultInstall]
+CopyFiles=BstkDrv.CopyFiles
+
+[DefaultInstall.Services]
+AddService=BstkDrv,0x00000002,BstkDrv_Service
+
+[SourceDisksFiles]
+BstkDrv_msi5.sys=1
+
+[SourceDisksNames]
+1=%DISK_NAME%,
+
+[BstkDrv.CopyFiles]
+BstkDrv_msi5.sys
+
+[BstkDrv_Service]
+DisplayName    = %BstkDrv.SVCDESC%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\BstkDrv_msi5.sys
+
+[Strings]
+BSTK = "Bluestacks"
+ClassName = "Bstk Drivers"
+BstkDrv.SVCDESC = "BlueStacks Driver Service"
+BstkDrv.DRVDESC = "BstkDrv"
+DISK_NAME = "BstkDrv Install Disk"
+
