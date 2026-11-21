@@ -4,12 +4,10 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
-using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
+using UnhandledExceptionMode = System.Windows.Forms.UnhandledExceptionMode;
 using System.Windows.Markup;
 using System.Windows.Media;
 using BlueStacks.Common;
@@ -50,6 +48,11 @@ namespace BlueStacks.Installer
 		// Token: 0x060000D1 RID: 209 RVA: 0x0000CFBC File Offset: 0x0000B1BC
 		protected override void OnStartup(StartupEventArgs e)
 		{
+			Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
+			InstallerProperties.InstallerExtractedDir = AppDomain.CurrentDomain.BaseDirectory;
+			App.sClock = Stopwatch.StartNew();
+			App.Init();
+			ServicePointManager.DefaultConnectionLimit = 1000;
 			Logger.Info("OnStartup");
 			bool flag = !this.IsInstallerArchitectureCompatible();
 			if (flag)
@@ -95,8 +98,12 @@ namespace BlueStacks.Installer
 			{
 				InstallerProperties.MainInstallerFilePath = App.sOpt.parentpath;
 			}
-			InstallerProperties.MainInstallerFolderPath = Path.GetDirectoryName(App.sOpt.parentpath);
+			InstallerProperties.MainInstallerFolderPath = Directory.Exists(App.sOpt.parentpath)
+				? Path.GetFullPath(App.sOpt.parentpath)
+				: Path.GetDirectoryName(App.sOpt.parentpath);
 			InstallerProperties.InSilentMode = App.sOpt.s;
+			InstallerProperties.DefaultVmName = App.sOpt.defaultImageName;
+			InstallerProperties.VmToLaunch = App.sOpt.imageToLaunch;
 			InstallerProperties.CampaignMD5 = App.sOpt.md5;
 			bool flag2 = !InstallerProperties.StartedFromMicroInstaller;
 			if (flag2)
@@ -292,19 +299,6 @@ namespace BlueStacks.Installer
 			}
 		}
 
-		// Token: 0x060000DC RID: 220 RVA: 0x0000231F File Offset: 0x0000051F
-		private static void Application_Startup(object sender, StartupEventArgs e)
-		{
-			ServicePointManager.ServerCertificateValidationCallback = (RemoteCertificateValidationCallback)Delegate.Combine(ServicePointManager.ServerCertificateValidationCallback, new RemoteCertificateValidationCallback(App.ValidateRemoteCertificate));
-			ServicePointManager.DefaultConnectionLimit = 1000;
-		}
-
-		// Token: 0x060000DD RID: 221 RVA: 0x0000D62C File Offset: 0x0000B82C
-		private static bool ValidateRemoteCertificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
-		{
-			return true;
-		}
-
 		// Token: 0x060000DE RID: 222 RVA: 0x0000D640 File Offset: 0x0000B840
 		private static void CheckIfAlreadyRunning()
 		{
@@ -387,7 +381,7 @@ namespace BlueStacks.Installer
 		// Token: 0x060000E5 RID: 229 RVA: 0x0000D814 File Offset: 0x0000BA14
 		public static void ExitApplication(int errorLevel = 0)
 		{
-			bool isRunning = App.sClock.IsRunning;
+			bool isRunning = App.sClock != null && App.sClock.IsRunning;
 			if (isRunning)
 			{
 				App.sClock.Stop();

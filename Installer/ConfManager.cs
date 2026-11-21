@@ -156,11 +156,11 @@ namespace BlueStacks.Installer
 								abiValues &= ~AbiValues.arm64;
 								abiValues &= ~AbiValues.x64;
 							}
-							List<string> value7 = new List<string>(from _ in abiValues.ToString().Split(new char[]
+							List<string> value7 = new List<string>(from abi in abiValues.ToString().Split(new char[]
 							{
 								','
 							}, StringSplitOptions.RemoveEmptyEntries)
-							select _.Trim());
+							select abi.Trim());
 							BridgeApis.ConfSetMultiString("bst.instance." + InstallerProperties.VmToLaunch + ".abi_list", value7);
 						}
 					}

@@ -8,7 +8,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BlueStacks</RootNamespace>
     <AssemblyName>BlueStacksInstaller</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <LangVersion>7.3</LangVersion>
+    <InstallerDependenciesDir Condition=" '$(InstallerDependenciesDir)' == '' ">$(MSBuildProjectDirectory)</InstallerDependenciesDir>
+    <BstkTypeLibPath Condition="Exists('$(InstallerDependenciesDir)\BstkTypeLib.dll')">$(InstallerDependenciesDir)\BstkTypeLib.dll</BstkTypeLibPath>
+    <BstkTypeLibPath Condition=" '$(BstkTypeLibPath)' == '' ">$(InstallerDependenciesDir)\CommonInstallUtils\BstkTypeLib.dll</BstkTypeLibPath>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60DC8134-EBA5-43B8-BCC9-BB4BC16C2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -34,31 +38,30 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BstkTypeLib" />
+    <Reference Include="BstkTypeLib">
+      <HintPath>$(BstkTypeLibPath)</HintPath>
+    </Reference>
     <Reference Include="DiscordRpc">
-      <HintPath>..\..\..\Downloads\FRΛMΣx Emulator\Setup\DiscordRpc.dll</HintPath>
+      <HintPath>$(InstallerDependenciesDir)\DiscordRpc.dll</HintPath>
     </Reference>
     <Reference Include="HD-Common">
-      <HintPath>..\..\..\Downloads\FRΛMΣx Emulator\Setup\HD-Common.dll</HintPath>
+      <HintPath>$(InstallerDependenciesDir)\HD-Common.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\Downloads\FRΛMΣx Emulator\Setup\Newtonsoft.Json.dll</HintPath>
+      <HintPath>$(InstallerDependenciesDir)\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack">
+      <HintPath>$(InstallerDependenciesDir)\Microsoft.WindowsAPICodePack.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>

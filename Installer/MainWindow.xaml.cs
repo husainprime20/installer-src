@@ -15,7 +15,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
-using System.Windows.Forms;
+using FolderBrowserDialog = System.Windows.Forms.FolderBrowserDialog;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
@@ -3091,11 +3091,11 @@ namespace BlueStacks.Installer
 				Padding = new Thickness(14.0, 11.0, 14.0, 11.0),
 				Margin = new Thickness(0.0, 0.0, 0.0, 9.0)
 			};
-			card.MouseEnter += delegate(object <p0>, System.Windows.Input.MouseEventArgs <p1>)
+			card.MouseEnter += delegate(object sender, System.Windows.Input.MouseEventArgs eventArgs)
 			{
 				card.BorderBrush = this.GoldA(78);
 			};
-			card.MouseLeave += delegate(object <p0>, System.Windows.Input.MouseEventArgs <p1>)
+			card.MouseLeave += delegate(object sender, System.Windows.Input.MouseEventArgs eventArgs)
 			{
 				card.BorderBrush = this.GoldA(34);
 			};
@@ -3236,21 +3236,21 @@ namespace BlueStacks.Installer
 				VerticalAlignment = VerticalAlignment.Center
 			};
 			ScaleTransform scale = (ScaleTransform)button.RenderTransform;
-			button.MouseEnter += delegate(object <p0>, System.Windows.Input.MouseEventArgs <p1>)
+			button.MouseEnter += delegate(object sender, System.Windows.Input.MouseEventArgs eventArgs)
 			{
 				this.Animate(scale, 1.03, 120.0);
 				button.Opacity = 0.93;
 			};
-			button.MouseLeave += delegate(object <p0>, System.Windows.Input.MouseEventArgs <p1>)
+			button.MouseLeave += delegate(object sender, System.Windows.Input.MouseEventArgs eventArgs)
 			{
 				this.Animate(scale, 1.0, 140.0);
 				button.Opacity = 1.0;
 			};
-			button.PreviewMouseDown += delegate(object <p0>, MouseButtonEventArgs <p1>)
+			button.PreviewMouseDown += delegate(object sender, MouseButtonEventArgs eventArgs)
 			{
 				this.Animate(scale, 0.97, 60.0);
 			};
-			button.PreviewMouseUp += delegate(object <p0>, MouseButtonEventArgs <p1>)
+			button.PreviewMouseUp += delegate(object sender, MouseButtonEventArgs eventArgs)
 			{
 				this.Animate(scale, 1.03, 80.0);
 			};
@@ -3278,11 +3278,11 @@ namespace BlueStacks.Installer
 				HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
 				VerticalAlignment = VerticalAlignment.Center
 			};
-			button.MouseEnter += delegate(object <p0>, System.Windows.Input.MouseEventArgs <p1>)
+			button.MouseEnter += delegate(object sender, System.Windows.Input.MouseEventArgs eventArgs)
 			{
 				button.Background = new SolidColorBrush(Color.FromArgb(55, tint.R, tint.G, tint.B));
 			};
-			button.MouseLeave += delegate(object <p0>, System.Windows.Input.MouseEventArgs <p1>)
+			button.MouseLeave += delegate(object sender, System.Windows.Input.MouseEventArgs eventArgs)
 			{
 				button.Background = new SolidColorBrush(Color.FromArgb(22, tint.R, tint.G, tint.B));
 			};
@@ -3510,28 +3510,28 @@ namespace BlueStacks.Installer
 			grid.Children.Add(box);
 			grid.Children.Add(hint);
 			host.Child = grid;
-			box.TextChanged += delegate(object <p0>, TextChangedEventArgs <p1>)
+			box.TextChanged += delegate(object sender, TextChangedEventArgs eventArgs)
 			{
 				hint.Visibility = ((!string.IsNullOrEmpty(placeholder) && box.Text.Length == 0) ? Visibility.Visible : Visibility.Collapsed);
 			};
-			box.GotFocus += delegate(object <p0>, RoutedEventArgs <p1>)
+			box.GotFocus += delegate(object sender, RoutedEventArgs eventArgs)
 			{
 				host.BorderBrush = this.GoldA(210);
 				host.Background = this.WhiteA(14);
 			};
-			box.LostFocus += delegate(object <p0>, RoutedEventArgs <p1>)
+			box.LostFocus += delegate(object sender, RoutedEventArgs eventArgs)
 			{
 				host.BorderBrush = this.WhiteA(26);
 				host.Background = this.WhiteA(10);
 			};
-			host.MouseEnter += delegate(object <p0>, System.Windows.Input.MouseEventArgs <p1>)
+			host.MouseEnter += delegate(object sender, System.Windows.Input.MouseEventArgs eventArgs)
 			{
 				if (!box.IsKeyboardFocusWithin)
 				{
 					host.BorderBrush = this.WhiteA(58);
 				}
 			};
-			host.MouseLeave += delegate(object <p0>, System.Windows.Input.MouseEventArgs <p1>)
+			host.MouseLeave += delegate(object sender, System.Windows.Input.MouseEventArgs eventArgs)
 			{
 				if (!box.IsKeyboardFocusWithin)
 				{

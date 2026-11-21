@@ -64,9 +64,6 @@ namespace BlueStacks.Installer
 			bool exitVar = false;
 			bool retryPressed = false;
 			CmdRes cmdRes = new CmdRes();
-			EventHandler <>9__2;
-			EventHandler <>9__3;
-			EventHandler <>9__4;
 			while (!exitVar)
 			{
 				string currentDirectory = Directory.GetCurrentDirectory();
@@ -103,45 +100,15 @@ namespace BlueStacks.Installer
 						{
 							Process.Start(e.Uri.ToString());
 						});
-						CustomMessageWindow customMessageWindow2 = customMessageWindow;
-						ButtonColors color = ButtonColors.Blue;
-						string text = "STRING_RETRY";
-						EventHandler handle;
-						if ((handle = <>9__2) == null)
+						EventHandler retry = delegate
 						{
-							handle = (<>9__2 = delegate(object sender, EventArgs e)
-							{
-								bool flag4 = !retryPressed;
-								if (flag4)
-								{
-									retryPressed = true;
-								}
-								InstallerStats.Enqueue("retry_button_pressed", false, "", "");
-							});
-						}
-						customMessageWindow2.AddButton(color, text, handle, null, false, null, true);
-						CustomMessageWindow customMessageWindow3 = customMessageWindow;
-						ButtonColors color2 = ButtonColors.WhiteWithBlackFG;
-						string text2 = "STRING_ABORT";
-						EventHandler handle2;
-						if ((handle2 = <>9__3) == null)
-						{
-							handle2 = (<>9__3 = delegate(object sender, EventArgs e)
-							{
-								exitVar = true;
-							});
-						}
-						customMessageWindow3.AddButton(color2, text2, handle2, null, false, null, true);
-						CustomMessageWindow customMessageWindow4 = customMessageWindow;
-						EventHandler handle3;
-						if ((handle3 = <>9__4) == null)
-						{
-							handle3 = (<>9__4 = delegate(object sender, EventArgs e)
-							{
-								exitVar = true;
-							});
-						}
-						customMessageWindow4.CloseButtonHandle(handle3, null);
+							retryPressed = true;
+							InstallerStats.Enqueue("retry_button_pressed", false, "", "");
+						};
+						EventHandler abort = delegate { exitVar = true; };
+						customMessageWindow.AddButton(ButtonColors.Blue, "STRING_RETRY", retry, null, false, null, true);
+						customMessageWindow.AddButton(ButtonColors.WhiteWithBlackFG, "STRING_ABORT", abort, null, false, null, true);
+						customMessageWindow.CloseButtonHandle(abort, null);
 						customMessageWindow.Owner = win;
 						customMessageWindow.ShowDialog();
 						customMessageWindow.Close();

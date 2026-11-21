@@ -1,17 +1,14 @@
 ﻿using System;
-using System.CodeDom.Compiler;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Markup;
 using BlueStacks.Common;
 
 namespace BlueStacks.Installer
 {
 	// Token: 0x0200001D RID: 29
-	public class StartInstall : UserControl, IComponentConnector
+	public partial class StartInstall : UserControl
 	{
 		// Token: 0x060000ED RID: 237 RVA: 0x0000E39C File Offset: 0x0000C59C
 		public StartInstall()
@@ -42,74 +39,5 @@ namespace BlueStacks.Installer
 			Process.Start("http://www.bluestacks.com/terms-and-privacy.html");
 		}
 
-		// Token: 0x060000F0 RID: 240 RVA: 0x0000E418 File Offset: 0x0000C618
-		[DebuggerNonUserCode]
-		[GeneratedCode("PresentationBuildTasks", "4.0.0.0")]
-		public void InitializeComponent()
-		{
-			bool contentLoaded = this._contentLoaded;
-			if (!contentLoaded)
-			{
-				this._contentLoaded = true;
-				Uri resourceLocator = new Uri("/BlueStacksInstaller;component/controls/startinstall.xaml", UriKind.Relative);
-				Application.LoadComponent(this, resourceLocator);
-			}
-		}
-
-		// Token: 0x060000F1 RID: 241 RVA: 0x0000E450 File Offset: 0x0000C650
-		[DebuggerNonUserCode]
-		[GeneratedCode("PresentationBuildTasks", "4.0.0.0")]
-		[EditorBrowsable(EditorBrowsableState.Never)]
-		void IComponentConnector.Connect(int connectionId, object target)
-		{
-			switch (connectionId)
-			{
-			case 1:
-				this.mInstallNowButton = (Button)target;
-				break;
-			case 2:
-				this.mCustomInstallLicensePanel = (StackPanel)target;
-				break;
-			case 3:
-				this.mCustomInstallImage = (CustomPictureBox)target;
-				break;
-			case 4:
-				this.mCustomInstallLabel = (Label)target;
-				break;
-			case 5:
-				this.mAgreeCheckBox = (TextWrapCustomCheckBox)target;
-				break;
-			case 6:
-				((Label)target).MouseDown += this.SoftwareLincenceMouseDown;
-				break;
-			case 7:
-				this.mReceiveCheckBox = (TextWrapCustomCheckBox)target;
-				break;
-			default:
-				this._contentLoaded = true;
-				break;
-			}
-		}
-
-		// Token: 0x04000089 RID: 137
-		internal Button mInstallNowButton;
-
-		// Token: 0x0400008A RID: 138
-		internal StackPanel mCustomInstallLicensePanel;
-
-		// Token: 0x0400008B RID: 139
-		internal CustomPictureBox mCustomInstallImage;
-
-		// Token: 0x0400008C RID: 140
-		internal Label mCustomInstallLabel;
-
-		// Token: 0x0400008D RID: 141
-		internal TextWrapCustomCheckBox mAgreeCheckBox;
-
-		// Token: 0x0400008E RID: 142
-		internal TextWrapCustomCheckBox mReceiveCheckBox;
-
-		// Token: 0x0400008F RID: 143
-		private bool _contentLoaded;
 	}
 }
